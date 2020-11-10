@@ -10,4 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "hello from remote"
+      - run: "::set-output name=version::$(cat .version)"
+        id: set_version
+
+      - run: echo "hello from ${{ steps.set_version.outputs.version}}"
