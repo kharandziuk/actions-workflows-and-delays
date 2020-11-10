@@ -1,3 +1,5 @@
+name: remote
+
 on:
   workflow_dispatch:
     branches:
@@ -8,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "hello"
+      - run: echo "hello from remote"

@@ -1,0 +1,19 @@
+name: caller
+
+on:
+  workflow_dispatch:
+    branches:
+      - main
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Invoke workflow without inputs
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: remote
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - run: echo "hello from caller"
