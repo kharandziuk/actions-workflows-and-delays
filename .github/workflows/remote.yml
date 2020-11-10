@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: "::set-output name=version::$(cat .version)"
+      - run: echo "::set-output name=version::$(cat .version)"
         id: set_version
 
       - run: echo "hello from ${{ steps.set_version.outputs.version}}"
