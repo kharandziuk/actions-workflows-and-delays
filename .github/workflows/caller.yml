@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
     branches:
       - main
+  schedule: # schedule action every five minutes
+      # * is a special character in YAML so you have to quote this string
+    - cron:  '*/15 * * * *'
 
 jobs:
   echo:
