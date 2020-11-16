@@ -1,6 +1,7 @@
 name: caller
 
 on:
+  push:
   workflow_dispatch:
     branches:
       - main
