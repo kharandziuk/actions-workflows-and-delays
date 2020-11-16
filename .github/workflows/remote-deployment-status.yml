@@ -1,0 +1,13 @@
+name: deploy env
+
+on:
+  deployment_status:
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: echo "hello from from deployment status"
