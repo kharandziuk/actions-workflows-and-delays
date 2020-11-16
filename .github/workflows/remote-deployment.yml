@@ -1,7 +1,7 @@
 name: deploy env
 
 on:
-  deployment:
+  workflow_dispatch:
 
 jobs:
   echo:
@@ -9,6 +9,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - run: echo "hello from caller"
+
+      - name: start deployment
+        uses: bobheadxi/deployments@master
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: release
 
       - run: echo "do my deploy"
         id: deployment

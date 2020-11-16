@@ -21,10 +21,8 @@ jobs:
 
       - run: echo "hello from caller"
 
-      - name: start deployment
-        uses: bobheadxi/deployments@master
-        id: deployment
+      - name: Invoke workflow without inputs
+        uses: benc-uk/workflow-dispatch@v1
         with:
-          step: start
+          workflow: deploy env
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          env: release
