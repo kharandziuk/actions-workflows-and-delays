@@ -10,4 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: echo "hello from from deployment"
+      - run: echo "do my deploy"
+        id: deployment
+
+      - name: update deployment status
+        uses: bobheadxi/deployments@master
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
