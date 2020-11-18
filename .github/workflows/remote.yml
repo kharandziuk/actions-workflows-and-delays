@@ -13,3 +13,8 @@ jobs:
         id: set_version
 
       - run: echo "hello from ${{ steps.set_version.outputs.version}}"
+
+      - run: |
+          echo "1"
+          echo "2"
+          echo "3"
