@@ -1,10 +1,13 @@
 name: caller
 
 on:
-  push:
-  workflow_dispatch:
+  pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
   schedule: # schedule action every five minutes
       # * is a special character in YAML so you have to quote this string
     - cron:  '*/15 * * * *'
@@ -19,17 +22,19 @@ jobs:
         with:
           workflow: remote
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - run: echo "hello from caller"
+      - run: |
+          echo "GITHUB_WORKFLOW $GITHUB_WORKFLOW"
+          echo "GITHUB_EVENT_NAME $GITHUB_EVENT_NAME"
+          echo "GITHUB_REF $GITHUB_REF"
 
       - run: echo "hello from caller"
 
-      - name: Invoke workflow without inputs
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: deploy env
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          event-type: deploy
+        #- name: Invoke workflow without inputs
+        #  uses: benc-uk/workflow-dispatch@v1
+        #  with:
+        #    workflow: deploy env
+        #    token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        #    ref: ${{ github.event.pull_request.head.ref }}

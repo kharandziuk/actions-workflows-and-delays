@@ -1,12 +1,23 @@
 name: one
 
 on:
-  push:
   workflow_dispatch:
-
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   echo:
     runs-on: ubuntu-latest
 
     steps:
       - run: echo "one"
+
+      - name: Invoke workflow without inputs
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: two
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          ref: ${{ github.event.pull_request.head.ref }}
